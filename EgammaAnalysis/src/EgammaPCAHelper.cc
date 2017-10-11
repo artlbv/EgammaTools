@@ -97,7 +97,7 @@ void EGammaPCAHelper::storeRecHits(const std::vector<std::pair<DetId, float>> &h
 
     for (unsigned int j = 0; j < hfsize; j++) {
         unsigned int layer = recHitTools_->getLayerWithOffset(hf[j].first);
-        if (layer > 28) continue;
+        //if (layer > 28) continue;
 
         const DetId rh_detid = hf[j].first;
         std::map<DetId,const HGCRecHit *>::const_iterator itcheck= hitMap_->find(rh_detid);
@@ -163,6 +163,8 @@ void EGammaPCAHelper::computePCA(float radius , bool withHalo) {
     std::set<int> layers;
     for ( unsigned i =0; i< nSpots ; ++i) {
         Spot spot(theSpots_[i]);
+	if (spot.layer() > 28) continue;
+
         if (!withHalo && (! spot.isCore() ))
             continue;
         if (initialCalculation) {
