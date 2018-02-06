@@ -79,6 +79,9 @@ public:
     void printHits( float radius) const;
     void clear();
 
+    std::vector<int> disabledLayers_;
+
+
 private:
     bool checkIteration() const ;
     void storeRecHits(const std::vector<std::pair<DetId, float>> &hf);

@@ -17,6 +17,7 @@ EGammaPCAHelper::EGammaPCAHelper(): invThicknessCorrection_({1. / 1.132, 1. / 1.
     hitMapOrigin_ = 0;
     hitMap_ = new std::map<DetId, const HGCRecHit *>();
     debug_ = false;
+    disabledLayers_ = {0};
 }
 
 EGammaPCAHelper::~EGammaPCAHelper() {
@@ -98,6 +99,9 @@ void EGammaPCAHelper::storeRecHits(const std::vector<std::pair<DetId, float>> &h
 
     for (unsigned int j = 0; j < hfsize; j++) {
         unsigned int layer = recHitTools_->getLayerWithOffset(hf[j].first);
+
+	if (find(disabledLayers_.begin(),disabledLayers_.end(),layer)!=disabledLayers_.end())
+	    continue;
 
         const DetId rh_detid = hf[j].first;
         std::map<DetId,const HGCRecHit *>::const_iterator itcheck= hitMap_->find(rh_detid);
