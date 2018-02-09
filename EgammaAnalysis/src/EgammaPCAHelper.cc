@@ -344,5 +344,6 @@ float EGammaPCAHelper::clusterDepthCompatibility(const LongDeps & ld, float & me
     float z = findZFirstLayer(ld);
     math::XYZVector dir=axis_.unit();
     measuredDepth = std::abs((z-std::abs(barycenter_.z()))/dir.z());
-    return showerDepth_.getClusterDepthCompatibility(measuredDepth,ld.energyEE(), expectedDepth,expectedSigma);
+    return showerDepth_.getClusterDepthCompatibility(measuredDepth,theCluster_->energy(), expectedDepth,expectedSigma);
+    //return showerDepth_.getClusterDepthCompatibility(measuredDepth,ld.energyEE(), expectedDepth,expectedSigma);
 }
